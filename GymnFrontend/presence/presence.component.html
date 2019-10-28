@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="container">
+    <h3>Liste des présences</h3>
+  </div> 
+  <div *ngIf="messageDel" class="alert alert-success">{{messageDel}}</div>
+  <div class="container">
+  <table class="table">
+  <thead>
+    <tr>
+      <th>Date de présence</th>
+      <th>Abonné</th>
+      <th>Régularité</th>
+      <th>Note</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr   *ngFor="let pres of presences">
+      <td>{{pres.datePresence | date}}</td>
+      <td>{{pres.subscriber}}</td>
+      <td> <div *ngIf="!pres.isReglo"><i class="fa fa-circle" style="font-size:20px;color:red" ></i></div> 
+        <div *ngIf="pres.isReglo"> <i class="fa fa-circle" style="font-size:20px;color:green"></i></div></td>
+      <td>{{pres.note}}</td>
+    </tr>
+  </tbody>
+  </table>
+  </div>
+  <div class="container">
+  <button routerLink="/add-presence" class="btn btn-success">Ajouter une présence</button>
+  </div>

@@ -1,0 +1,107 @@
+<div class="row">
+  <div class="col-md-4">
+
+    <div class="container">
+      <h4>Ajout d'un abonnement</h4>
+
+      <div class="alert alert-danger" *ngIf="subscriptionExist">
+        {{subscriptionExistMesssage}}
+      </div>
+
+      <div class="alert alert-danger" *ngIf="addSubsForm.dirty && subscriberSelected.invalid">
+        Vous devez obligatoirement choisir un abonné!
+      </div>
+
+      <div class="alert alert-danger" *ngIf="addSubsForm.dirty && date.invalid">
+        Vous devez obligatoirement choisir la datte de la souscription!
+      </div>
+
+      <form (ngSubmit)="!addSubsForm.invalid && addSubscription()" #addSubsForm="ngForm">
+        <fieldset>
+          <label>Choisir un abonné</label>
+          <select type="text" class="form-control" name="subscriberId" #subscriberSelected="ngModel"
+            (change)=retriveDateInscription() required="required" [(ngModel)]="SubscriberId">
+            <option *ngFor="let sub of subscriber" value="{{sub.idSub}}">{{sub.firstNameSub}} {{sub.lastNameSub}}
+            </option> 
+          </select>
+        </fieldset>
+        <fieldset>
+          <label>Date de payement</label>
+          <input type="date" class="form-control" name="dateSubscription" #date="ngModel" required="required"
+            [ngModel]="subscription.datePaymentSubSubs| date:'yyyy-MM-dd'" 
+
+            (ngModelChange)="subscription.datePaymentSubSubs=$event">
+        </fieldset>
+
+        <fieldset>
+          <label>Type de souscription</label>
+          <select type="text" class="form-control" name="subscriberId" #subscriberSelected="ngModel" required="required"
+            [(ngModel)]="typeAndIdOfSouscription" (change)=handleTypeSouscription()>
+            <option value="perDay,{{perDay.idTypeSubs}}" *ngFor="let perDay of perDaySubscription">
+              {{perDay.nameTypeSubs}}</option>
+            <option value="perMonth,{{perMonth.idTypeSubs}}" *ngFor="let perMonth of perMonthSubscription">
+              {{perMonth.nameTypeSubs}}</option>
+            <option value="perThreeMonth,{{perThreeMonth.idTypeSubs}}"
+              *ngFor="let perThreeMonth of perThreeMonthSubscription">{{perThreeMonth.nameTypeSubs}}</option>
+            <option value="perSixMonth,{{perSixMonth.idTypeSubs}}" *ngFor="let perSixMonth of perSixMonthSubscription">
+              {{perSixMonth.nameTypeSubs}}</option>
+            <option value="perYear,{{perYear.idTypeSubs}}" *ngFor="let perYear of perYearSubscription">
+              {{perYear.nameTypeSubs}}</option>
+            <option value="promo,{{promo.idTypeSubs}},{{promo.nbMonth}}}" *ngFor="let promo of promotion">{{promo.nameTypeSubs}}</option>
+          </select>
+        </fieldset>
+
+        <div *ngIf="perDayOptiion" class="container">
+          <fieldset>
+            <label>Date d'abonnement</label>
+            <input type="date" class="form-control" name="startDateValidSubSubs" #startDateValidSubSubs="ngModel"
+              required="required" [(ngModel)]="subscription.startDateValidSubSubs" (change)=retriveSubscriptionInCalendar() >
+          </fieldset>
+        </div>
+
+        <div *ngIf="notPerDay" class="container">
+
+          <fieldset>
+            <label>Reference de payement</label>
+            <select type="text" class="form-control" name="referenceOfPayement" #referenceOfPayement="ngModel"
+              required="required" [(ngModel)]="whereToStart" (change)=displayMonthForm() >
+              <option value="startFromMonthFirstDay">A partir du debut du mois</option>
+              <option value="startFromSubscriptionDay">A partir de la date d'inscription</option>
+            </select>
+          </fieldset>
+          <div class="container" *ngIf="displayWhichMonth">
+            <fieldset>
+              <label>Mois début subscription</label>
+              <input type="month" class="form-control" name="monthSubscription" (change)=validationDateSubscriptions()
+                #monthSubscription="ngModel" required="required" [(ngModel)]="monthSelected">
+            </fieldset>
+
+
+            <fieldset>
+              <label>Date debut</label>
+              <input type="date" class="form-control" name="startDateValidSubSubs" #startDateValidSubSubs="ngModel"
+                [ngModel]="subscription.startDateValidSubSubs| date:'yyyy-MM-dd'" readonly="readonly"
+                (ngModelChange)="subscription.startDateValidSubSubs=$event">
+            </fieldset>
+
+            <fieldset>
+              <label>Date fin</label>
+              <input type="date" class="form-control" name="endDateValidSubSubs" #startDateValidSubSubs="ngModel"
+                [ngModel]="subscription.endDateValidSubSubs| date:'yyyy-MM-dd'" readonly="readonly"
+                (ngModelChange)="subscription.endDateValidSubSubs=$event">
+            </fieldset>
+          </div>
+        </div>
+        <div *ngIf="perDayOptiion" class="container">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-success">Ajouter</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <full-calendar (eventClick)="eventClick($event.detail)" [events]="calendarEvents" defaultView="dayGridMonth"
+      [plugins]="calendarPlugins"></full-calendar>
+  </div>
+</div>

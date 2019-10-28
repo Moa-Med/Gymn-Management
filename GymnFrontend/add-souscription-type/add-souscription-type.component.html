@@ -1,0 +1,147 @@
+<div class="container">
+  <h1>Ajout d un nouveau type de souscription</h1>
+
+  <div class="alert alert-danger" *ngIf="addSubsTypeForm.dirty && nameTypeSubs.invalid">
+    Vous devez obligatoirement saisir le nom de la souscription a créé !!
+  </div>
+
+  <div class="alert alert-danger" *ngIf="addSubsTypeForm.dirty && descTypeSubs.invalid">
+    Vous devez obligatoirement saisir une description !!
+  </div>
+
+  <div class="alert alert-danger" *ngIf="addSubsTypeForm.dirty && typeSouscriptionCreated.invalid">
+    Vous devez obligatoirement choisir un type de souscription !!
+  </div>
+<!--
+  <div class="alert alert-danger" *ngIf="addSubsTypeForm.dirty && displayPerDayFrom && pricePerDaySubscriptionModel.invalid">
+    Vous devez obligatoirement saisir le prix journalier !!
+  </div>
+
+  <div class="alert alert-danger" *ngIf="addSubsTypeForm.dirty && displayPerMonthForm && pricePerMonthSubscription.invalid">
+    Vous devez obligatoirement saisir le prix mensuel !!
+  </div>
+
+  <div class="alert alert-danger" *ngIf="addSubsTypeForm.dirty && displayPerThreeMonthForm && pricePerThreeMonthSubscription.invalid">
+    Vous devez obligatoirement saisir le prix trimestriel !!
+  </div>
+
+  <div class="alert alert-danger" *ngIf="addSubsTypeForm.dirty && displayPerYearForm && pricePerYearSubscription.invalid">
+    Vous devez obligatoirement saisir le prix annuel !!
+  </div>
+
+  <div class="alert alert-danger" *ngIf="addSubsTypeForm.dirty && displayPromotionForm && pricePromotion.invalid">
+    Vous devez obligatoirement saisir le prix la promotion !!
+  </div>
+-->
+  <form (ngSubmit)="!addSubsTypeForm.invalid && addSubscriptionType()" #addSubsTypeForm="ngForm">
+    <fieldset>
+      <label>Nom du type de souscription</label>
+      <input type="text" class="form-control" name="nameTypeSubs" #nameTypeSubs="ngModel" required="required"
+        [(ngModel)]="subscriptionType.nameTypeSubs">
+    </fieldset>
+
+    <fieldset>
+      <label>Description</label>
+      <input type="text" class="form-control" name="descTypeSubs" #descTypeSubs="ngModel" [(ngModel)]="subscriptionType.descTypeSubs">
+    </fieldset>
+
+    <fieldset>
+      <label>Type de souscription</label>
+      <select type="text" class="form-control" name="typeSouscriptionCreated" (click)=verifWhichCase()
+        #typeSouscriptionCreated="ngModel" [(ngModel)]="typeSouscriptionSelected" required="required">
+        <option value="1">Payement par jour</option>
+        <option value="2">Payement par mois</option>
+        <option value="3">Payement par 3 mois</option>
+        <option value="4">Payement par 6 mois</option>
+        <option value="5">Payement par an</option>
+        <option value="6">Promotion</option>
+      </select>
+    </fieldset>
+
+    <div *ngIf="displayPerDayFrom">
+      <fieldset>
+        <label>Prix journalier</label>
+        <input type="text" class="form-control" name="pricePerDaySubscription" #pricePerDaySubscription="ngModel"
+          required="required" [(ngModel)]="subscriptionType.pricePerDaySubscription" >
+      </fieldset>
+    </div>
+
+    
+    <div *ngIf="displayPerMonthForm">
+      <fieldset>
+        <label>Prix mensuel</label>
+        <input type="text" class="form-control" name="pricePerMonthSubscription" #pricePerMonthSubscription="ngModel"
+          required="required" [(ngModel)]="subscriptionType.pricePerMonthSubscription">
+      </fieldset>
+    </div>
+
+    <div *ngIf="displayPerSixMonthForm">
+        <fieldset>
+          <label>Prix semestriel</label>
+          <input type="text" class="form-control" name="pricePerSixMonthSubscription" #pricePerSixMonthSubscription="ngModel"
+            required="required" [(ngModel)]="subscriptionType.pricePerSixMonthSubscription">
+        </fieldset>
+      </div>
+
+    
+    <div *ngIf="displayPerThreeMonthForm">
+      <fieldset>
+        <label>Prix trimestriel</label>
+        <input type="text" class="form-control" name="pricePerThreeMonthSubscription" #pricePerThreeMonthSubscription="ngModel"
+          required="required" [(ngModel)]="subscriptionType.pricePerThreeMonthSubscription">
+      </fieldset>
+    </div>
+
+    <div *ngIf="displayPerYearForm">
+      <fieldset>
+        <label>Prix annuel</label>
+        <input type="text" class="form-control" name="pricePerYearSubscription" #pricePerYearSubscription="ngModel"
+          required="required" [(ngModel)]="subscriptionType.pricePerYearSubscription">
+      </fieldset>
+    </div>
+
+    <div *ngIf="displayPromotionForm">
+        <fieldset>
+            <label>Nombre de mois</label>
+            <input type="text" class="form-control" name="nbMonth" #nbMonth="ngModel"
+              required="required" [(ngModel)]="subscriptionType.nbMonth">
+          </fieldset>
+      <fieldset>
+        <label>Prix promotion</label>
+        <input type="text" class="form-control" name="pricePromotion" #pricePromotion="ngModel"
+          required="required" [(ngModel)]="subscriptionType.pricePromotion">
+      </fieldset>
+      <fieldset>
+          <label>Date début promotion</label>
+          <input type="date" class="form-control" name="dateStartPromotion" #dateStartPromotion="ngModel" required="required"
+            [ngModel]="subscriptionType.dateStartPromotion| date:'yyyy-MM-dd'"
+            (ngModelChange)="subscriptionType.dateStartPromotion=$event">
+        </fieldset>
+        <fieldset>
+            <label>Date fin promotion</label>
+            <input type="date" class="form-control" name="dateEndPromotion" #dateEndPromotion="ngModel" required="required"
+              [ngModel]="subscriptionType.dateEndPromotion| date:'yyyy-MM-dd'"
+              (ngModelChange)="subscriptionType.dateEndPromotion=$event">
+          </fieldset>
+    </div>
+    <!--
+    <fieldset>
+      <label>Date de payement</label>
+      <input type="date" class="form-control" name="dateSubscription" #date="ngModel" required="required"
+        [ngModel]="subscription.datePaymentSubSubs| date:'yyyy-MM-dd'"
+        (ngModelChange)="subscription.datePaymentSubSubs=$event">
+    </fieldset>
+
+    <fieldset>
+      <label>Type de souscription</label>
+      <select type="text" class="form-control" name="typeOfSubsccription" #typeSubsccription="ngModel" [(ngModel)]="subscription.subscriptionType">
+          <option>XS</option>
+        </select>
+    </fieldset>
+
+    -->
+
+    <br>
+    <button type="submit" class="btn btn-success">Ajouter</button>
+  </form>
+</div>

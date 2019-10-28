@@ -1,0 +1,51 @@
+ <div class="row">
+  <div class="col-md-4">
+    
+<div class="container">
+  <h4>Ajout d'une presence</h4>
+
+  <div class="alert alert-danger" *ngIf="presenceExist">
+    {{presenceExistMessage}}
+  </div>
+
+  <div *ngIf="addPresenceSuccess" class="alert alert-success">{{addPresenceSuccess}}</div>
+
+  <div class="alert alert-danger" *ngIf="addPresnceForm.dirty && subscriberSelected.invalid">
+    Vous devez obligatoirement choisir un abonné!
+  </div>
+
+  <div class="alert alert-danger" *ngIf="addPresnceForm.dirty && date.invalid">
+      Vous devez obligatoirement choisir la date de la presence!
+    </div>
+
+  <form (ngSubmit)="!addPresnceForm.invalid && addPresence()" #addPresnceForm="ngForm">
+    <fieldset>
+      <label>Choisir un abonné</label>
+      <select  type="text" class="form-control" name="subscriberId"  #subscriberSelected="ngModel" 
+      (change)=retrievePresencesAndSubscriptions() [(ngModel)]="idSubscriber">
+         <option *ngFor="let sub of subscriber" value="{{sub.idSub}}">{{sub.firstNameSub}} {{sub.lastNameSub}}</option> 
+      </select>
+    </fieldset>
+
+    <fieldset>
+      <label>Date de présence</label>
+      <input type="date" class="form-control" name="dateSubscription" #date="ngModel" required="required"
+        [ngModel]="presence.datePresence| date:'yyyy-MM-dd'" (change)=retrievePresencesAndSubscriptions()
+        (ngModelChange)="presence.datePresence=$event">
+    </fieldset>
+
+    <fieldset>
+      <label>Note</label>
+      <input type="text" class="form-control" name="note" #note="ngModel" [(ngModel)]="presence.note">
+    </fieldset>
+
+    <br>
+    <button type="submit" class="btn btn-success">Ajouter</button>
+  </form>
+</div>
+    </div>
+    <div class="col-md-6">
+      <full-calendar (eventClick)="eventClick()" #calendar  [events]="calendarEvents1" defaultView="dayGridMonth" [plugins]="calendarPlugins"></full-calendar>
+    </div>
+</div>
+

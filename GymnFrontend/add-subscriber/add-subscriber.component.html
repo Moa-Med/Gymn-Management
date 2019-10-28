@@ -1,0 +1,67 @@
+
+<div class="container">
+    <div class="alert alert-danger" *ngIf="addSubForm.dirty && fistName.invalid">
+        Le nom est obligatoire et dois contenir au minimum 2 carractéres
+      </div>
+
+      <div class="alert alert-danger" *ngIf="addSubForm.dirty && lastNameSub.invalid">
+          Le Prenom est obligatoire et dois contenir au minimum 2 carractéres
+        </div>
+
+        <div class="alert alert-danger" *ngIf="addSubForm.dirty && ageSub.invalid">
+            L age est obligatoire 
+          </div>
+
+          <div class="alert alert-danger" *ngIf="addSubForm.dirty && dateSubscription.invalid">
+              La datte est obligatoire 
+            </div>
+  
+<form (ngSubmit)="!addSubForm.invalid && addOrUpdateSubscriber()" #addSubForm="ngForm">
+
+  <fieldset>
+  <label >Nom</label> 
+  <input type="text" class="form-control" name="firstNameSub" #fistName="ngModel" required="required"
+   [(ngModel)]="subscriber.firstNameSub" minlength="2">
+</fieldset>
+
+<fieldset>
+  <label >Prenom</label> 
+  <input type="text" class="form-control" name="lastNameSub" #lastNameSub="ngModel" minlength="2" required="required"
+   [(ngModel)]="subscriber.lastNameSub">
+</fieldset>
+
+<fieldset>
+  <label >Age</label> 
+  <input type="text" class="form-control" name="ageSub" #ageSub="ngModel" required="required"
+   [(ngModel)]="subscriber.ageSub">
+</fieldset>
+
+<fieldset>
+  <label >Poids</label> 
+  <input type="text" class="form-control" name="weightSub" #weightSub="ngModel" 
+   [(ngModel)]="subscriber.weightSub">
+</fieldset>
+
+<fieldset>
+  <label >Taille</label> 
+  <input type="text" class="form-control" name="heightSub" #heightSub="ngModel" 
+   [(ngModel)]="subscriber.heightSub">
+</fieldset>
+
+<fieldset>
+  <label >Size</label>
+  <select type="text" class="form-control" name="sizeSub" #sizeSub="ngModel" 
+  [(ngModel)]="subscriber.sizeSub">
+      <option>XS</option><option>S</option><option>	M</option><option>L</option>
+      <option>XL</option><option>XXL</option><option>XXXL</option>
+    </select>
+</fieldset>
+<fieldset>
+    <label>Date inscription</label>
+  <input type="date" class="form-control" name="dateSubscription" #dateSubscription="ngModel" required="required" readonly="readonly"
+   [ngModel]="subscriber.dateSubscription | date:'yyyy-MM-dd'" (ngModelChange)="dateSubscription.dateSubscription=$event">
+</fieldset>
+<br>
+<button type="submit" class="btn btn-success">{{addOrUpdate}}</button>
+</form>
+</div>

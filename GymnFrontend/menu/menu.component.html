@@ -1,0 +1,21 @@
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <ul class="navbar-nav">
+      <li *ngIf="handleLoginService.isLogged()" class="badge badge-primary badge-pill" >{{handleLoginService.getClubName()}}</li>
+      <li ><a *ngIf="handleLoginService.isLogged()" class="nav-link" routerLink="/welcome">Acceuil</a></li>
+      <li ><a *ngIf="handleLoginService.isLogged()" class="nav-link" routerLink="/subscriber">Gestion des abonnées</a></li>
+      <li ><a *ngIf="handleLoginService.isLogged()" class="nav-link" routerLink="/subscription">Gestion abonnements</a></li>
+      <li ><a *ngIf="handleLoginService.isLogged()" class="nav-link" routerLink="/souscription-type">Gerer les type de souscription</a></li>
+      <!-- <li ><a *ngIf="handleLoginService.isLogged()" class="nav-link" routerLink="/calendar">Calendrier test</a></li> -->
+      <li ><a *ngIf="handleLoginService.isLogged()" class="nav-link" routerLink="/presence">Gestion des présences</a></li>
+    </ul>
+
+    <ul class="navbar-nav navbar-collapse justify-content-end">
+      <li *ngIf="handleLoginService.isLogged()" class="badge badge-primary badge-pill">{{handleLoginService.getUserConnected()}}</li>
+      <li ><a *ngIf="!handleLoginService.isLogged()" class="nav-link" routerLink="">login</a></li>
+      <li ><a *ngIf="handleLoginService.isLogged()" class="nav-link" routerLink="/logout">logout</a></li>
+    </ul>
+  </nav>
+</header>
+
+<br>

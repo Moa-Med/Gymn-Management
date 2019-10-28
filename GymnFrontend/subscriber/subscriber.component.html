@@ -1,0 +1,41 @@
+
+<div class="container">
+    <h3>Liste des abonnées</h3>
+</div> 
+<div *ngIf="messageDel" class="alert alert-success">{{messageDel}}</div>
+<div class="container">
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Prenom</th>
+      <th>Date inscription</th>
+      <th>Age</th>
+      <th>details</th>
+      <th>Modifier</th>
+      <th>supprimer</th>
+      <th>abonnement</th>
+      <th>Photo</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr   *ngFor="let sub of subscribers">
+      <td>{{sub.firstNameSub}}</td>
+      <td>{{sub.lastNameSub}}</td>
+      <td>{{sub.dateSubscription | date}}</td>
+      <td>{{sub.ageSub}}</td>
+      <td><button (click)="detailSub(sub.idSub)"class="btn btn-outline-info">Details</button></td>
+      <td><button (click)="updateSub(sub.idSub)"class="btn btn-outline-primary">Modifier</button></td>
+      <td><button (click)="deleteSub(sub.idSub)"class="btn btn-outline-danger">Supprimer</button></td>
+      <td><button (click)="showCalendarSubscriber(sub.idSub)"class="btn btn-outline-secondary">abonnements</button></td>
+      <td><div class="text-center">
+        <img src="..." class="rounded" alt="...">
+      </div></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="container">
+  <button (click)="addSubscriber()" class="btn btn-success">Ajouter un abonné</button>
+</div>

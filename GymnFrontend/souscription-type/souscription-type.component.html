@@ -1,0 +1,94 @@
+
+<div class="container">
+  <h1>Liste des type de souscription</h1>
+</div> 
+<div *ngIf="messageDel" class="alert alert-success">{{messageDel}}</div>
+<div class="container">
+<table class="table">
+<thead>
+  <tr>
+    <th>Type</th>
+    <th>Nom</th>
+    <th>Description</th>
+    <th>Prix (Dh)</th>
+    <th>Durée promo (nb mois)</th>
+    <th>Date debut promo</th>
+    <th>Date fin promo</th>
+    <th>Modifier</th>
+    <th>Supprimer</th>
+
+  </tr>
+</thead>
+<tbody>
+  <tr   *ngFor="let perDay of perDaySubscription">
+    <td><strong>Payement par jour</strong></td>
+    <td>{{perDay.nameTypeSubs}}</td>
+    <td>{{perDay.descTypeSubs}}</td>
+    <td>{{perDay.pricePerDaySubscription}}</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td><button (click)="updateSubsType(perDay.idTypeSubs)"class="btn btn-outline-primary">Modifier</button></td>
+    <td><button (click)="deleteSubsType(perDay.idTypeSubs)"class="btn btn-outline-danger">Supprimer</button></td>
+  </tr>
+  <tr   *ngFor="let perMonth of perMonthSubscription">
+      <td><strong>Payement par mois</strong></td>
+      <td>{{perMonth.nameTypeSubs}}</td>
+      <td>{{perMonth.descTypeSubs}}</td>
+      <td>{{perMonth.pricePerMonthSubscription}}</td>
+      <td>N/A</td>
+      <td>N/A</td>
+      <td>N/A</td>
+      <td><button (click)="updateSubsType(perMonth.idTypeSubs)"class="btn btn-outline-primary">Modifier</button></td>
+      <td><button (click)="deleteSubsType(perMonth.idTypeSubs)"class="btn btn-outline-danger">Supprimer</button></td>
+    </tr>
+    <tr   *ngFor="let perThreeMonth of perThreeMonthSubscription">
+        <td><strong>Payement par 3 mois</strong></td>
+        <td>{{perThreeMonth.nameTypeSubs}}</td>
+        <td>{{perThreeMonth.descTypeSubs}}</td>
+        <td>{{perThreeMonth.pricePerThreeMonthSubscription}}</td>
+        <td>N/A</td>
+        <td>N/A</td>
+        <td>N/A</td>
+        <td><button (click)="updateSubsType(perThreeMonth.idTypeSubs)"class="btn btn-outline-primary">Modifier</button></td>
+        <td><button (click)="deleteSubsType(perThreeMonth.idTypeSubs)"class="btn btn-outline-danger">Supprimer</button></td>
+      </tr>
+      <tr   *ngFor="let perSixMonth of perSixMonthSubscription">
+          <td><strong>Payement par 6 mois</strong></td>
+          <td>{{perSixMonth.nameTypeSubs}}</td>
+          <td>{{perSixMonth.descTypeSubs}}</td>
+          <td>{{perSixMonth.pricePerSixMonthSubscription}}</td>
+          <td>N/A</td>
+          <td>N/A</td>
+          <td>N/A</td>
+          <td><button (click)="updateSubsType(perSixMonth.idTypeSubs)"class="btn btn-outline-primary">Modifier</button></td>
+          <td><button (click)="deleteSubsType(perSixMonth.idTypeSubs)"class="btn btn-outline-danger">Supprimer</button></td>
+        </tr>
+        <tr   *ngFor="let perYear of perYearSubscription">
+            <td><strong>Payement par an</strong></td>
+            <td>{{perYear.nameTypeSubs}}</td>
+            <td>{{perYear.descTypeSubs}}</td>
+            <td>{{perYear.pricePerYearSubscription}}</td>
+            <td>N/A</td>
+            <td>N/A</td>
+            <td>N/A</td>
+            <td><button (click)="updateSubsType(perYear.idTypeSubs)"class="btn btn-outline-primary">Modifier</button></td>
+            <td><button (click)="deleteSubsType(perYear.idTypeSubs)"class="btn btn-outline-danger">Supprimer</button></td>
+          </tr >
+          <tr   *ngFor="let promo of promotion">
+              <td><strong>Promotion</strong></td>
+              <td>{{promo.nameTypeSubs}}</td>
+              <td>{{promo.descTypeSubs}}</td>
+              <td>{{promo.pricePromotion}}</td>
+              <td>{{promo.nbMonth}}</td>
+              <td>{{promo.dateStartPromotion | date}}</td>
+              <td>{{promo.dateEndPromotion | date}}</td>
+              <td><button (click)="updateSubsType(promo.idTypeSubs)"class="btn btn-outline-primary">Modifier</button></td>
+              <td><button (click)="deleteSubsType(promo.idTypeSubs)"class="btn btn-outline-danger">Supprimer</button></td>
+            </tr>
+</tbody>
+</table>
+</div>
+<div class="container">
+<button routerLink="/add-souscription-type" class="btn btn-success">Ajouter un Type de souscription</button>
+</div>

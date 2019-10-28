@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <canvas height="140" width="400" baseChart [datasets]="barChartData" [labels]="barChartLabels"
+          [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
+        </canvas>
+      </div>
+
+      <!-- Force next columns to break to new line at md breakpoint and up -->
+      <div class="w-100 d-none d-md-block"></div>
+
+      <div class="col-sm-6">
+
+        <canvas height="75" width="200" baseChart [datasets]="lineChartData" [labels]="lineChartLabels"
+          [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType"
+          [plugins]="lineChartPlugins">
+        </canvas>
+      </div>
+      <div class="col-sm-6">
+        <canvas height="75" width="200" baseChart [data]="pieChartData" [labels]="pieChartLabels" (click)="pieChartEvent()"
+          [chartType]="pieChartType" [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend">
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <script src="node_modules/chart.js/src/chart.js"></script>  -->

@@ -1,0 +1,38 @@
+
+<div class="container">
+  <h3>Liste des abonnements</h3>
+</div> 
+<div *ngIf="messageDel" class="alert alert-success">{{messageDel}}</div>
+<div class="container">
+<table class="table">
+<thead>
+  <tr>
+    <th>Date payement</th>
+    <th>Type de souscription</th>
+    <th>Abonné</th>
+    <th>Enregistré par</th>
+    <th>debut validité</th>
+    <th>fin validité</th>
+    <th>Prix</th>
+    <th>Supprimer</th>
+  </tr>
+</thead>
+<tbody>
+ 
+   <tr  *ngFor="let subs of subscriptions">
+    <td>{{subs.datePaymentSubSubs | date}}</td>
+    <td>{{subs.subscriptionType}}</td>
+    <td>{{subs.subscriber}}</td>
+    <td>{{subs.logger}}</td>
+    <td>{{subs.startDateValidSubSubs | date}}</td>
+    <td>{{subs.endDateValidSubSubs | date}} </td>
+    <td>{{subs.price}}</td>
+    <td><button (click)="deleteSubscription(subs.idSubs)"class="btn btn-outline-danger">supprimer</button></td>
+  </tr>
+</tbody>
+</table>
+</div>
+<!-- {{returnLogger(8)}} -->
+<div class="container">
+<button routerLink="/add-subscription" class="btn btn-success">Ajouter un abonnement</button>
+</div>
